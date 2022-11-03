@@ -20,6 +20,8 @@
         <th scope="col">Lastname</th>
         <th scope="col">Email</th>
         <th scope="col">Contact</th>
+        <th>Edit</th>
+        <th>Delete</th>
       </tr>
     </thead>
 
@@ -32,6 +34,19 @@
         <td>{{i.Lastname}}</td>
         <td>{{i.Email}}</td>
         <td>{{i.Contact}}</td>
+        <td>
+          <form name="EditForm" action="{% url 'editpage' pk=i.id %}">
+        {% csrf_token %}
+        <input type="submit" value="Edit">
+      </form>
+        </td>
+        <td>
+          <form name="DeleteForm" action="{% url 'delete' pk=i.id %}">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+      </form>
+        </td>
+        
       </tr>
       {% endfor %}
     </tbody>

@@ -29,5 +29,26 @@ def ShowPage(request):
     return render(request,"show.html",{'key1':all_data})
 
 
+#Edit page view
+def EditPage(request,pk):
+  #Fetching the data of particular ID
+  get_data=Teacher.objects.get(id=pk)
+  return render(request,"edit.html",{'key2':get_data})
+#Update Data views
+def UpdateData(request,pk):
+  udate=Teacher.objects.get(id=pk)
+  udate.Firstname=request.POST['fname']
+  udate.Lastname=request.POST['lname']
+  udate.Email=request.POST['email']
+  udate.Contact=request.POST['contact']
+  #Query for update
+  udate.save()
+  return redirect('showpage')
+#Delete data view
+def DeleteData(request,pk):
+ ddata=Teacher.objects.get(id=pk)
+ #Query for delete
+ ddata.delete()
+ return redirect('showpage')
 
   
